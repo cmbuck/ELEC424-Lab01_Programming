@@ -1,11 +1,19 @@
 Lab01: Programming in a Linux Environment
-<PUT NAME HERE>
+Christopher Buck
 
 Part 1
 
 Q1. What were the arguments passed to the chmod command in (3)?
+The arguments passed were "751 justifytext.py".
 
 Q2. Copy-paste the directories in your path, and the contents of the directory where you placed the symbolic link as printed out by ls -l.
+/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+
+total 8
+lrwxrwxrwx 1 root root 68 Sep  5 10:55 justifytext -> /home/christopher/workspace/ELEC424-Lab01_Programming/justifytext.py
+lrwxrwxrwx 1 root root 51 Jun  2 10:42 papilio-loader-gui -> /opt/GadgetFactory/papilio-loader/papilio-loader.sh
+lrwxrwxrwx 1 root root 65 Jun  3 09:37 papilio-prog -> /opt/GadgetFactory/papilio-loader/programmer/linux32/papilio-prog
+
 
 Part 2
 
