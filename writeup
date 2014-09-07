@@ -18,10 +18,16 @@ lrwxrwxrwx 1 root root 65 Jun  3 09:37 papilio-prog -> /opt/GadgetFactory/papili
 Part 2
 
 Q3. What operations are done on the input integer?
+right shift by one: 	shrb -0x4(%rbp)
+mask the lowest nibble:	andb $0xf,-0x4(%rbp)
+left shift 4 bits:	shlb $0x4,-0x4(%rbp)
 
 Q4. What is the present bug, and under what conditions is it triggered? 
+The bug is the assignment of read only memory by way of attempting to modify one of the letters in the "error or not?" string.  The instruction "movb $0x45,(%rax)" is the offending instruction
 
 Q5. What are possible ways to fix this bug?
+If the string was placed instead into stack memory, then the segfault would not occur.  This may be accomplished by using an array instead of a pointer.
+"x[] = "error or not?"
 
 Part 3
 
