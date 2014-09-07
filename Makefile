@@ -1,5 +1,6 @@
 CC=gcc
-CFLAGS=-I. -g
+ORDER=ASC
+CFLAGS=-I. -g -D $(ORDER) -Wall -Wextra
 DEPS = sort.h read_data.h
 OBJ = sort.o
 
