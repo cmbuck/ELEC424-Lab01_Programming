@@ -60,4 +60,54 @@ void
 merge_sort(int input_array[], int output_array[], int num)
 {
 	/* COMPLETE ME */
+	if (num == 0)
+		return;
+	else if (num == 1)
+	{
+		output_array[0] = input_array[0];
+		return;
+	}
+
+	else //num > 1
+	{
+		int mid = num / 2;
+		int left_in[mid], left_out[mid];
+		int right_in[num - mid], right_out[num - mid];
+		//mid is exclusive of left, and inclusive in right
+		//copy the input array to the new arrays
+		memcpy(left_in, &input_array[0], mid * sizeof(int));
+		memcpy(right_in, &input_array[mid], (num - mid) * sizeof(int));
+		//recurse on each half
+		merge_sort(left_in, left_out, mid);
+		merge_sort(right_in, right_out, num - mid);
+		//merge the two arrays
+		int i,l,r;
+		l = r = 0;
+		char asc = 1; //in ascending order?
+#ifdef DSC
+		asc = 0;
+#elif ASC
+		asc = 1;
+#endif
+		for (i = 0; i < num; i++)
+		{
+			if (asc) {
+				if (r == num - mid || 
+				  (l < mid && left_out[l] < right_out[r]))
+					output_array[i] = left_out[l++];
+				else 
+					output_array[i] = right_out[r++];
+			}
+			else { //dsc
+				if (r == num - mid ||
+				  (l < mid && left_out[l] > right_out[r]))
+					output_array[i] = left_out[l++];
+				else
+					output_array[i] = right_out[r++];
+			}
+		}
+	}
 }
+
+//void
+//mergeSortRecurse(int arr[], 
