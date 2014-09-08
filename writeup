@@ -32,11 +32,14 @@ If the string was placed instead into stack memory, then the segfault would not 
 Part 3
 
 Q6. What is the maximum length array our program can sort?
+An array length of 86 was confirmed to work.  87 and the printed result is incorrect, and higher lengths produce a segfault.
 
 Q7. What is the difference between incrementing int* and char* by 1 (i.e. ((int *)p)+1) vs ((char *)p)+1))?
 
 Q8. Are the input arrays passed by reference or value to merge_sort?
+By reference.
 
 Q9. What is the difference between #include "header.h" and #include <header.h>?
+The preprocessor will search in different locations.  With quotes, it will search in the local directory and with angle brackets it will search in system library paths.
 
 Q10. Use your justifytext script to justify this writeup (after completing it) to a length of 80 characters.
