@@ -1,46 +1,68 @@
-Lab01: Programming in a Linux Environment
-Christopher Buck
+Lab01:         Programming         in         a         Linux        Environment
+Christopher                                                                 Buck
 
-Part 1
+Part                                                                           1
 
-Q1. What were the arguments passed to the chmod command in (3)?
-The arguments passed were "751 justifytext.py".
+Q1.   What   were   the   arguments   passed   to  the  chmod  command  in  (3)?
+The        arguments        passed        were       "751       justifytext.py".
 
-Q2. Copy-paste the directories in your path, and the contents of the directory where you placed the symbolic link as printed out by ls -l.
-/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+Q2.  Copy-paste  the directories in your path, and the contents of the directory
+where   you   placed   the   symbolic   link   as   printed   out   by   ls  -l.
+/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin
+:/bin:/usr/games
 
-total 8
-lrwxrwxrwx 1 root root 68 Sep  5 10:55 justifytext -> /home/christopher/workspace/ELEC424-Lab01_Programming/justifytext.py
-lrwxrwxrwx 1 root root 51 Jun  2 10:42 papilio-loader-gui -> /opt/GadgetFactory/papilio-loader/papilio-loader.sh
-lrwxrwxrwx 1 root root 65 Jun  3 09:37 papilio-prog -> /opt/GadgetFactory/papilio-loader/programmer/linux32/papilio-prog
+total                                                                          8
+lrwxrwxrwx     1    root    root    68    Sep    5    10:55    justifytext    ->
+/home/christopher/workspace/ELEC424-Lab01_Programming/justifytext.py
+lrwxrwxrwx    1    root    root   51   Jun   2   10:42   papilio-loader-gui   ->
+/opt/GadgetFactory/papilio-loader/papilio-loader.sh
+lrwxrwxrwx    1    root    root    65    Jun    3    09:37    papilio-prog    ->
+/opt/GadgetFactory/papilio-loader/programmer/linux32/papilio-prog
 
 
-Part 2
+Part                                                                           2
 
-Q3. What operations are done on the input integer?
-right shift by one: 	shrb -0x4(%rbp)
-mask the lowest nibble:	andb $0xf,-0x4(%rbp)
-left shift 4 bits:	shlb $0x4,-0x4(%rbp)
+Q3.     What     operations     are     done     on     the    input    integer?
+right          shift          by          one:          shrb          -0x4(%rbp)
+mask         the        lowest        nibble:        andb        $0xf,-0x4(%rbp)
+left          shift         4         bits:         shlb         $0x4,-0x4(%rbp)
 
-Q4. What is the present bug, and under what conditions is it triggered? 
-The bug is the assignment of read only memory by way of attempting to modify one of the letters in the "error or not?" string.  The instruction "movb $0x45,(%rax)" is the offending instruction.  It is triggered if the product of shifting right by one, masking the lower nibble, and left shifting by 4 bits is greater than 128.
+Q4.  What  is  the  present  bug,  and  under  what  conditions is it triggered?
+The  bug  is  the  assignment of read only memory by way of attempting to modify
+one  of  the  letters  in  the  "error  or  not?"  string. The instruction "movb
+$0x45,(%rax)"  is  the  offending instruction. It is triggered if the product of
+shifting  right  by  one,  masking the lower nibble, and left shifting by 4 bits
+is                     greater                     than                     128.
 
-Q5. What are possible ways to fix this bug?
-If the string was placed instead into stack memory, then the segfault would not occur.  This may be accomplished by using an array instead of a pointer.
-"x[] = "error or not?".  Alternatively, not re-assigning x[0] at all would resolve the bug too.
+Q5.      What      are      possible      ways      to     fix     this     bug?
+If  the  string  was  placed  instead into stack memory, then the segfault would
+not  occur.  This  may  be  accomplished by using an array instead of a pointer.
+"x[]  =  "error  or  not?".  Alternatively,  not  re-assigning x[0] at all would
+resolve                     the                     bug                     too.
 
-Part 3
+Part                                                                           3
 
-Q6. What is the maximum length array our program can sort?
-Sizes up to and including 100 can be sorted.  The header defines this amount to be the limit of maximum length array.
+Q6.    What    is   the   maximum   length   array   our   program   can   sort?
+Sizes  up  to and including 100 can be sorted. The header defines this amount to
+be         the        limit        of        maximum        length        array.
 
-Q7. What is the difference between incrementing int* and char* by 1 (i.e. ((int *)p)+1) vs ((char *)p)+1))?
-The first increments p by sizeof(int) bytes, and the second increments p by sizeof(char) bytes.
+Q7.  What  is  the  difference  between  incrementing  int* and char* by 1 (i.e.
+((int             *)p)+1)             vs             ((char            *)p)+1))?
+The  first  increments  p  by  sizeof(int) bytes, and the second increments p by
+sizeof(char)                                                              bytes.
 
-Q8. Are the input arrays passed by reference or value to merge_sort?
-By reference.  The address of the array is what is passed between the functions.
+Q8.   Are  the  input  arrays  passed  by  reference  or  value  to  merge_sort?
+By  reference.  The  address  of  the  array  is  what  is  passed  between  the
+functions.
 
-Q9. What is the difference between #include "header.h" and #include <header.h>?
-This is implementation specific, as the C standard does not specify exactly what what needs to happen and leaved much up for the implementation to determine.  For GCC, angle brackets are used for system header files, which will be searched for in a list of standard system directories.  Quotes are used for header files of one's own program.  GCC looks first in the directories containing this particular source file before searching otherwise specified directories and system directories.
+Q9.  What is the difference between #include "header.h" and #include <header.h>?
+This  is  implementation  specific,  as  the C standard does not specify exactly
+what  what  needs  to  happen  and  leaved  much  up  for  the implementation to
+determine.  For  GCC,  angle  brackets  are  used for system header files, which
+will  be  searched for in a list of standard system directories. Quotes are used
+for  header  files  of  one's  own  program.  GCC looks first in the directories
+containing  this  particular  source  file  before searching otherwise specified
+directories                and                system                directories.
 
-Q10. Use your justifytext script to justify this writeup (after completing it) to a length of 80 characters.
+Q10.  Use  your justifytext script to justify this writeup (after completing it)
+to            a           length           of           80           characters.
