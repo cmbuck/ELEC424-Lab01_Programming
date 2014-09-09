@@ -32,15 +32,15 @@ If the string was placed instead into stack memory, then the segfault would not 
 Part 3
 
 Q6. What is the maximum length array our program can sort?
-Sizes up to and including 100 should and do work.  However, in one test an array length of 86 was confirmed to work.  87 and the printed result is incorrect, and higher lengths produce a segfault.
+Sizes up to and including 100 can be sorted.  The header defines this amount to be the limit of maximum length array.
 
 Q7. What is the difference between incrementing int* and char* by 1 (i.e. ((int *)p)+1) vs ((char *)p)+1))?
 The first increments p by sizeof(int) bytes, and the second increments p by sizeof(char) bytes.
 
 Q8. Are the input arrays passed by reference or value to merge_sort?
-By reference.
+By reference.  The address of the array is what is passed between the functions.
 
 Q9. What is the difference between #include "header.h" and #include <header.h>?
-The preprocessor will search in different locations.  With quotes, it will search in the local directory and with angle brackets it will search in system library paths.
+This is implementation specific, as the C standard does not specify exactly what what needs to happen and leaved much up for the implementation to determine.  For GCC, angle brackets are used for system header files, which will be searched for in a list of standard system directories.  Quotes are used for header files of one's own program.  GCC looks first in the directories containing this particular source file before searching otherwise specified directories and system directories.
 
 Q10. Use your justifytext script to justify this writeup (after completing it) to a length of 80 characters.
