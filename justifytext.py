@@ -10,30 +10,63 @@ def justify(file_name, justify_length):
     letters = 0
 
     for line in file:
-        arr = line.split()
-	letters = 0
-	for word in arr:
-		letters += len(word)
-	subtract = justify_length - letters
-	if (len(arr) > 1):
-	    inc = subtract / (len(arr) - 1)
-	    whitespaces = []
-	    for i in range(0, len(arr) - 1):
-		whitespaces.append(inc)
-	    remainder = subtract - inc * (len(arr) - 1)
-	#for w in whitespaces:
-	#    if (remainder > 0):
-	#	w = w + 1
-	#	remainder--
-	for i in range(0, len(arr)):
-	    sys.stdout.write(arr[i])
-	    if (i < len(arr) - 1):
-		sys.stdout.write(" " * inc)
-		if (remainder > 0):
-		    sys.stdout.write(" ")
-		    remainder -= 1
-	sys.stdout.write("\n")
-	#print arr[0] + subt
+	handle_line(line, justify_length)
+
+def handle_line(line, justify_length):
+	if (len(line) > justify_length):
+		#line needs to be split
+		arr = line.split()
+		length = 0;
+		prev = 0;
+		string = ""
+		for i in range(0, len(arr)):
+			length += len(arr[i])
+			length += 1
+			string += arr[i] + " "
+			if (length >= justify_length):
+				if (prev == i):
+					handle_line(arr[i][:justify_length],
+					  justify_length)
+					handle_line(arr[i][justify_length:], 
+					  justify_length)
+					string = ""
+					length = 0
+				else:
+					handle_line(string[:(-1 -
+					  len(arr[i]))], justify_length)
+					string = arr[i] + " "
+					length = len(string)
+					prev = i;
+			#Handle the leftover, if any
+		if (len(string) > 0):
+			handle_line(string[:-1], justify_length)
+	else:
+		arr = line.split()
+		letters = 0
+		for word in arr:
+			letters += len(word)
+		subtract = justify_length - letters
+		if (len(arr) > 1):
+		    inc = subtract / (len(arr) - 1)
+		    whitespaces = []
+		    for i in range(0, len(arr) - 1):
+			whitespaces.append(inc)
+		    remainder = subtract - inc * (len(arr) - 1)
+		#for w in whitespaces:
+		#    if (remainder > 0):
+		#	w = w + 1
+		#	remainder--
+		for i in range(0, len(arr)):
+		    sys.stdout.write(arr[i])
+		    if (i < len(arr) - 1):
+			sys.stdout.write(" " * inc)
+			if (remainder > 0):
+			    sys.stdout.write(" ")
+			    remainder -= 1
+		sys.stdout.write("\n")
+		#print arr[0] + subt
+
+
 
 # Program justifies text contents of a given file
 # This is the actual code that gets run when the
